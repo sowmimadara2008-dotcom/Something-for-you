@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Kowsi Akka 🤍</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background: #fce4ec;
+      background: radial-gradient(circle, #ffebee 0%, #f8bbd0 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Container Box matching exact Instagram Reel Aspect Ratio */
+    .app-card {
+      width: 100%;
+      max-width: 400px;
+      height: 92vh;
+      max-height: 760px;
+      background: rgba(255, 240, 245, 0.9);
+      backdrop-filter: blur(15px);
+      border-radius: 35px;
+      box-shadow: 0 20px 50px rgba(233, 30, 99, 0.25);
+      border: 4px solid #ffffff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Background floating hearts */
+    .bg-heart {
+      position: absolute;
+      color: rgba(244, 143, 177, 0.4);
+      animation: floatUp 8s infinite linear;
+      z-index: 0;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(800px) scale(0.5); opacity: 0; }
+      50% { opacity: 0.8; }
+      100% { transform: translateY(-100px) scale(1.2); opacity: 0; }
+    }
+
+    /* Pages Styling */
+    .page {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      padding: 25px;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+      animation: fadeIn 0.4s ease-out;
+    }
+    .page.active { display: flex; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .title-cursive {
+      font-family: 'Dancing Script', cursive;
+      font-size: 36px;
+      color: #ad1457;
+      margin-bottom: 10px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+    }
+    .sub-title {
+      font-size: 15px;
+      color: #880e4f;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    /* Buttons */
+    .pink-btn {
+      background: linear-gradient(135deg, #ff4081, #c2185b);
+      color: white;
+      border: none;
+      padding: 13px 32px;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 30px;
+      cursor: pointer;
+      margin-top: 20px;
+      box-shadow: 0 8px 20px rgba(194, 24, 91, 0.3);
+      transition: all 0.3s ease;
+    }
+    .pink-btn:hover { transform: translateY(-3px) scale(1.03); }
+    .pink-btn:active { transform: scale(0.97); }
+
+    /* Page 1: Keypad Passcode */
+    .pin-box {
+      font-size: 26px;
+      letter-spacing: 12px;
+      margin: 15px 0 25px;
+      height: 40px;
+      color: #d81b60;
+      font-weight: bold;
+    }
+    .keypad {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      width: 85%;
+    }
+    .keypad button {
+      background: #ffffff;
+      border: 2px solid #f8bbd0;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 22px;
+      font-weight: 600;
+      color: #ad1457;
+      cursor: pointer;
+      margin: 0 auto;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      transition: 0.2s;
+    }
+    .keypad button:active { background: #ff4081; color: white; border-color: #ff4081; }
+
+    /* Page 3: Balloon Game */
+    .balloon-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
+      margin-top: 15px;
+    }
+    .balloon {
+      width: 80px;
+      height: 105px;
+      border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: inset -6px -6px 12px rgba(0,0,0,0.15), 0 8px 15px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .balloon::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      width: 2px;
+      height: 15px;
+      background: rgba(0,0,0,0.2);
+    }
+    .b1 { background: linear-gradient(135deg, #ff80ab, #ff4081); }
+    .b2 { background: linear-gradient(135deg, #ea80fc, #ab47bc); }
+    .b3 { background: linear-gradient(135deg, #80d8ff, #29b6f6); }
+    .b4 { background: linear-gradient(135deg, #b9f6ca, #66bb6a); }
+    .popped { opacity: 0; transform: scale(1.6); pointer-events: none; }
+
+    /* Page 4: Cake & Candle */
+    .cake-container {
+      font-size: 90px;
+      position: relative;
+      cursor: pointer;
+      margin: 20px 0;
+    }
+    .flame {
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 35px;
+      animation: flameFlicker 0.4s infinite alternate;
+    }
+    @keyframes flameFlicker {
+      from { transform: translateX(-50%) scale(1); opacity: 1; }
+      to { transform: translateX(-50%) scale(1.15); opacity: 0.8; }
+    }
+
+    /* Page 5: Bouquet Glow */
+    .bouquet-img {
+      font-size: 110px;
+      filter: drop-shadow(0 10px 15px rgba(233, 30, 99, 0.3));
+      animation: pulse 2s infinite alternate;
+    }
+    @keyframes pulse { from { transform: scale(1); } to { transform: scale(1.08); } }
+
+    /* Page 6: Realistic Letter Box */
+    .envelope-btn {
+      width: 140px;
+      height: 95px;
+      background: linear-gradient(135deg, #ff4081, #d81b60);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 45px;
+      cursor: pointer;
+      box-shadow: 0 12px 25px rgba(216, 27, 96, 0.3);
+      transition: 0.3s;
+    }
+    .envelope-btn:hover { transform: scale(1.08); }
+    
+    .letter-card {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 20px;
+      border: 2px dashed #f48fb1;
+      max-height: 480px;
+      overflow-y: auto;
+      text-align: left;
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: #37474f;
+      white-space: pre-line;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+    }
+    .letter-card::-webkit-scrollbar { width: 5px; }
+    .letter-card::-webkit-scrollbar-thumb { background: #f48fb1; border-radius: 10px; }
+
+    /* Page 7: Tamil Kavithai Card */
+    .kavithai-card {
+      background: linear-gradient(135deg, #fff0f5, #ffe4e1);
+      border-left: 5px solid #d81b60;
+      padding: 25px;
+      border-radius: 15px;
+      font-size: 16px;
+      line-height: 1.9;
+      color: #880e4f;
+      font-weight: 500;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      margin: 15px 0;
+    }
+
+    /* Page 8: Photo Frame */
+    .photo-wrapper {
+      width: 230px;
+      height: 290px;
+      border: 8px solid #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+      overflow: hidden;
+      margin-bottom: 15px;
+    }
+    .photo-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Page 9: Gift Unbox */
+    .gift-box {
+      font-size: 100px;
+      cursor: pointer;
+      animation: bounce 1.5s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Audio Background Music -->
+  <audio id="bgm" loop src="bgm.mp3"></audio>
+
+  <div class="app-card">
+
+    <!-- Floating Background Hearts -->
+    <div class="bg-heart" style="left: 10%; animation-delay: 0s;">💖</div>
+    <div class="bg-heart" style="left: 40%; animation-delay: 2s;">✨</div>
+    <div class="bg-heart" style="left: 70%; animation-delay: 4s;">🌸</div>
+    <div class="bg-heart" style="left: 85%; animation-delay: 6s;">🤍</div>
+
+    <!-- PAGE 1: Passcode -->
+    <div class="page active" id="page1">
+      <h2 class="title-cursive">Enter Passcode</h2>
+      <p class="sub-title">Something special is waiting for you 🤍</p>
+      <div class="pin-box" id="pinDisplay">••••</div>
+      <div class="keypad">
+        <button onclick="pressKey('1')">1</button>
+        <button onclick="pressKey('2')">2</button>
+        <button onclick="pressKey('3')">3</button>
+        <button onclick="pressKey('4')">4</button>
+        <button onclick="pressKey('5')">5</button>
+        <button onclick="pressKey('6')">6</button>
+        <button onclick="pressKey('7')">7</button>
+        <button onclick="pressKey('8')">8</button>
+        <button onclick="pressKey('9')">9</button>
+        <button onclick="clearPin()">C</button>
+        <button onclick="pressKey('0')">0</button>
+        <button onclick="checkPin()">✓</button>
+      </div>
+    </div>
+
+    <!-- PAGE 2: Greeting & Intro -->
+    <div class="page" id="page2">
+      <h2 class="title-cursive">Happy Birthday, Kowsi Akka 🥳</h2>
+      <p style="font-size: 70px; margin: 15px 0;">🧸🎀</p>
+      <p class="sub-title">Are you excited for what's next?</p>
+      <button class="pink-btn" onclick="nextPage(3)">Yes, Let's Go! ✨</button>
+    </div>
+
+    <!-- PAGE 3: Balloon Pop Game -->
+    <div class="page" id="page3">
+      <h2 class="title-cursive">Pop All 4 Balloons 🎈</h2>
+      <p class="sub-title">Tap each balloon to unveil your surprise</p>
+      <div class="balloon-grid">
+        <div class="balloon b1" onclick="popBalloon(this)">Pop Me</div>
+        <div class="balloon b2" onclick="popBalloon(this)">Pop Me</div>
+        <div class="balloon b3" onclick="popBalloon(this)">Pop Me</div>
+        <div class="balloon b4" onclick="popBalloon(this)">Pop Me</div>
+      </div>
+      <button class="pink-btn" id="balloonNextBtn" style="display:none;" onclick="nextPage(4)">Next Surprise 👉</button>
+    </div>
+
+    <!-- PAGE 4: Blow Candle -->
+    <div class="page" id="page4">
+      <h2 class="title-cursive">Blow The Candle, Akka 🎂</h2>
+      <div class="cake-container" onclick="blowCandle()">
+        <span class="flame" id="flame">🔥</span>
+        🎂
+      </div>
+      <p class="sub-title" style="margin-top: 15px;">Tap on the flame to blow it out!</p>
+      <button class="pink-btn" id="candleNextBtn" style="display:none;" onclick="nextPage(5)">Make a Wish & Continue ✨</button>
+    </div>
+
+    <!-- PAGE 5: Rose Bouquet -->
+    <div class="page" id="page5">
+      <h2 class="title-cursive">Your Rose Bouquet 🌹</h2>
+      <div class="bouquet-img">💐</div>
+      <p class="sub-title">You make my world beautiful!</p>
+      <p style="font-size: 13px; color: #880e4f;">Forever lucky to have an akka like you 🤍</p>
+      <button class="pink-btn" onclick="nextPage(6)">Read Special Letter ✉️</button>
+    </div>
+
+    <!-- PAGE 6: Emotional Letter -->
+    <div class="page" id="page6">
+      <h2 class="title-cursive">A Letter From My Heart 💌</h2>
+      <div class="envelope-btn" id="envelope" onclick="openLetter()">✉️</div>
+      <div class="letter-card" id="letterBox" style="display:none;">
+Dear kowsi maahhh :
+
+I am sorry naa unna neraya kasta padithite neraya ketta varthai la unna thitite ana apa kuda neetha sorry sonna 🫂  
+
+Enaku vantu ye gowri pesurathu pudikathu na ava unta pesurapa enaku thonum eve ye EN KOWSI Kuda peura nu thonum ena avala tha unaku neraya problem vanthuchu ava unna neraya hurt pannita athunala enaku ava pesurathu pudikathu 
+
+
+En kowsi ku meaning enna nu enaku theriyathu nee vantu enaku akka friendu enna va vena irukalam ana sathiyama thappana relationship la naa unna pathathu illa Enaku unna pudikum dii🤍
+
+
+Ena senjatha maraka kudathu nu solluvaga oru time la enaku onnume illa apa neetha enna pathukuta unta kaasu irukapa la enaku kudutha 🩹 aprm maina antha word (unaku kaasu venu na enta kelu vera yartaum kekatha🥺)enta apdi yaru sonnathu illa...
+
+
+Life la oru sila pera maraka kudathu nu solluvaga antha mari person la neeum oru aal 🧿
+
+Kandipa un 🫵 life oru naal marum nee athuku aprm happy ya irupa Naa Universe ta sollita edha panna solli avaru kandi pa pannuvaru😁..
+
+You are such a good person, semma confident iruku unaku unta iruka mari guts enta illa ka 💪
+
+Enga paru onnu solre nalla neyabagam vachuka un life la aduthu enna nadakun la enaku theriyathu ana onnu un family, society edhuva irunthalum porumaya iru mudiyala ya thiripi aduchuru🤜 yara irunthalu🙎‍♀️
+
+Life la ennikavathu yarume illanu feel panrapa sowmi ku oru phone pannu enga irunthalu vanthuruve 🫂💎. 
+
+Happy birthday akka🤍
+
+Stay strong!stay Happy! And sorry 😔...
+      </div>
+      <button class="pink-btn" id="letterNextBtn" style="display:none; margin-top: 15px;" onclick="nextPage(7)">Read Special Kavithai 📜</button>
+    </div>
+
+    <!-- PAGE 7: Sister Kavithai Page -->
+    <div class="page" id="page7">
+      <h2 class="title-cursive">என் அன்பு அக்காவிற்கு... 📜</h2>
+      <div class="kavithai-card">
+        உடன்ப பிறந்து இரத்தத்தில் இணையவில்லை என்றாலும்,<br>
+        உள்ளத்தால் என் இதயத்தில் இணைந்த உயிர் நீ! ❤️<br><br>
+        அம்மாவிற்குப் பிறகு என் அக்கறையைக் காட்டும் இன்னொரு அன்னை...<br>
+        காலம் கடந்து போனாலும் கலையாத அழகான உறவு நமது! 🧿✨
+      </div>
+      <button class="pink-btn" onclick="nextPage(8)">View Our Memory 📸</button>
+    </div>
+
+    <!-- PAGE 8: Photo Memory -->
+    <div class="page" id="page8">
+      <h2 class="title-cursive">Best Memory 📸</h2>
+      <div class="photo-wrapper">
+        <img src="photo.jpg" alt="Memory Photo" onerror="this.src='https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500&auto=format&fit=crop&q=60'">
+      </div>
+      <p class="sub-title">You are my favorite person! 💖</p>
+      <button class="pink-btn" onclick="nextPage(9)">Tap The Gift 🎁</button>
+    </div>
+
+    <!-- PAGE 9: Gift Box -->
+    <div class="page" id="page9">
+      <h2 class="title-cursive">One Last Thing... 🎁</h2>
+      <div class="gift-box" onclick="nextPage(10)">🎁</div>
+      <p class="sub-title">Tap the gift box to open!</p>
+    </div>
+
+    <!-- PAGE 10: Final Wishes & Replay -->
+    <div class="page" id="page10">
+      <h2 class="title-cursive">Lots of love for you ❤️</h2>
+      <p style="font-size: 60px; margin: 15px 0;">🧸🌸✨</p>
+      <p class="sub-title">Once again, Happy Birthday Kowsi Akka! 💫</p>
+      <button class="pink-btn" onclick="location.reload()">🔄 Replay Surprise</button>
+    </div>
+
+  </div>
+
+  <script>
+    // Music Auto Play Logic
+    const bgm = document.getElementById("bgm");
+    function startAudio() {
+      bgm.play().catch(() => console.log("Audio waiting for user click"));
+    }
+
+    // Passcode Logic (Exact: 2610)
+    let currentPin = "";
+    const targetPin = "2610";
+
+    function pressKey(val) {
+      if (currentPin.length < 4) {
+        currentPin += val;
+        updatePinDisplay();
+      }
+    }
+
+    function clearPin() {
+      currentPin = "";
+      updatePinDisplay();
+    }
+
+    function updatePinDisplay() {
+      document.getElementById("pinDisplay").innerText = "•".repeat(currentPin.length) || "••••";
+    }
+
+    function checkPin() {
+      if (currentPin === targetPin) {
+        startAudio();
+        nextPage(2);
+      } else {
+        alert("Incorrect Passcode! Hint: 2610");
+        clearPin();
+      }
+    }
+
+    // Page Switch Function
+    function nextPage(num) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById('page' + num).classList.add('active');
+    }
+
+    // Balloon Game Logic
+    let poppedCount = 0;
+    function popBalloon(elem) {
+      if (!elem.classList.contains('popped')) {
+        elem.classList.add('popped');
+        poppedCount++;
+        if (poppedCount === 4) {
+          document.getElementById('balloonNextBtn').style.display = 'inline-block';
+        }
+      }
+    }
+
+    // Candle Blowing Logic
+    function blowCandle() {
+      document.getElementById('flame').style.display = 'none';
+      document.getElementById('candleNextBtn').style.display = 'inline-block';
+    }
+
+    // Letter Open Logic
+    function openLetter() {
+      document.getElementById('envelope').style.display = 'none';
+      document.getElementById('letterBox').style.display = 'block';
+      document.getElementById('letterNextBtn').style.display = 'inline-block';
+    }
+  </script>
+</body>
+</html>
